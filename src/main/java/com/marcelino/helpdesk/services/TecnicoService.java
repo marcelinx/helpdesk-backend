@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.marcelino.helpdesk.domain.Tecnico;
 import com.marcelino.helpdesk.repositories.TecnicoRepository;
+import com.marcelino.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TecnicoService {
@@ -16,6 +17,6 @@ public class TecnicoService {
 	
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("objeto nao encontrado! ID: " + id));
 	}
 }
